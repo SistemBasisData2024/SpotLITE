@@ -12,5 +12,5 @@ SpotLITE adalah aplikasi web untuk mendengarkan musik. Proyek ini merupakan proy
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan proyek ini di lingkungan lokal Anda.
 1. **Clone repositori ini**:
    ```bash
-   git clone https://github.com/username/SpotLITE.git
+   git clone https://github.com/purooo0/SpotLITE.git
    cd SpotLITE

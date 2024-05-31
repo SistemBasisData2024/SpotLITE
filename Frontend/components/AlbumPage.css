@@ -1,0 +1,41 @@
+.album-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .album-form input[type="text"],
+  .album-form input[type="date"] {
+    width: 200px;
+    margin-right: 10px;
+  }
+  
+  .album-form button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .album-list {
+    margin-top: 20px;
+  }
+  
+  .album-card {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .album-card h3 {
+    margin-top: 0;
+  }
+  
+  .album-card button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }  

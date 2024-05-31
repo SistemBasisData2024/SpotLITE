@@ -1,0 +1,40 @@
+.artist-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .artist-form input[type="text"] {
+    width: 200px;
+    margin-right: 10px;
+  }
+  
+  .artist-form button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .artist-list {
+    margin-top: 20px;
+  }
+  
+  .artist-card {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .artist-card h3 {
+    margin-top: 0;
+  }
+  
+  .artist-card button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }  

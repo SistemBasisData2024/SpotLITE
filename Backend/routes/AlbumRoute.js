@@ -1,0 +1,38 @@
+const express = require('express');
+const router = express.Router();
+const albumRepo = require('../repositories/AlbumRepo');
+
+// Route to create a new album
+router.post('/', async (req, res) => {
+  try {
+    const newAlbum = await albumRepo.createAlbum(req.body);
+    res.status(201).json(newAlbum);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to delete an album by ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletedRowsCount = await albumRepo.deleteAlbumById(req.params.id);
+    if (deletedRowsCount === 0) {
+      return res.status(404).json({ error: 'Album not found' });
+    }
+    res.json({ message: 'Album deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to update an album by ID
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedAlbum = await albumRepo.updateAlbumById(req.params.id, req.body);
+    res.json(updatedAlbum);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+module.exports = router;

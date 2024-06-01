@@ -32,24 +32,21 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Route to delete a song by ID
-router.delete('/:id', async (req, res) => {
-  try {
-    const deletedRowsCount = await songRepo.deleteSongById(req.params.id);
-    if (deletedRowsCount === 0) {
-      return res.status(404).json({ error: 'Song not found' });
-    }
-    res.json({ message: 'Song deleted successfully' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
 // Route to update a song by ID
 router.put('/:id', async (req, res) => {
   try {
     const updatedSong = await songRepo.updateSongById(req.params.id, req.body);
     res.json(updatedSong);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to delete a song by ID
+router.delete('/:id', async (req, res) => {
+  try {
+    await songRepo.deleteSongById(req.params.id);
+    res.json({ message: 'Song deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

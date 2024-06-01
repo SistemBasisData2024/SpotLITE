@@ -12,11 +12,6 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// Connect to PostgreSQL
-db.authenticate()
-  .then(() => console.log('Connected to database'))
-  .catch(err => console.error('Error connecting to database:', err));
-
 // Routes
 app.use('/home', homeRoute);
 app.use('/playlists', playlistRoute);

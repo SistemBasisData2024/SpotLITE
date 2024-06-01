@@ -6,6 +6,9 @@ const pool = new Pool({
   database: 'SpotLITE',
   password: 'HG3i6TZQqDpa',
   port: 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 module.exports = pool;

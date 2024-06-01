@@ -12,14 +12,21 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route to delete an artist by ID
-router.delete('/:id', async (req, res) => {
+// Route to get an artist by ID
+router.get('/:id', async (req, res) => {
   try {
-    const deletedRowsCount = await artistRepo.deleteArtistById(req.params.id);
-    if (deletedRowsCount === 0) {
-      return res.status(404).json({ error: 'Artist not found' });
-    }
-    res.json({ message: 'Artist deleted successfully' });
+    const artist = await artistRepo.getArtistById(req.params.id);
+    res.json(artist);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to get all artists
+router.get('/', async (req, res) => {
+  try {
+    const artists = await artistRepo.getAllArtists();
+    res.json(artists);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -30,6 +37,16 @@ router.put('/:id', async (req, res) => {
   try {
     const updatedArtist = await artistRepo.updateArtistById(req.params.id, req.body);
     res.json(updatedArtist);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to delete an artist by ID
+router.delete('/:id', async (req, res) => {
+  try {
+    await artistRepo.deleteArtistById(req.params.id);
+    res.json({ message: 'Artist deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

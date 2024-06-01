@@ -1,15 +1,23 @@
-const Home = require('../schemas/HomeSchema');
+const pool = require('../config/db');
 
-// Function to fetch popular songs data
-const getPopularSongs = async () => {
+const getPopularSongsAndArtists = async () => {
   try {
-    const popularSongs = await Home.findAll({ limit: 10 });
-    return popularSongs;
+    console.log('Executing query to fetch popular songs and artists');
+    const result = await pool.query(`
+      SELECT musics.*, artists.name as artist_name
+      FROM musics
+      JOIN artists ON musics.artist_id = artists.id
+      ORDER BY musics.popularity DESC
+      LIMIT 10
+    `);
+    console.log('Query executed successfully, result:', result.rows);
+    return result.rows;
   } catch (error) {
-    throw new Error(`Error while fetching popular songs: ${error.message}`);
+    console.error(`Error executing query: ${error.message}`);
+    throw new Error(`Error fetching popular songs and artists: ${error.message}`);
   }
 };
 
 module.exports = {
-  getPopularSongs,
+  getPopularSongsAndArtists
 };

@@ -12,14 +12,21 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route to delete an album by ID
-router.delete('/:id', async (req, res) => {
+// Route to get an album by ID
+router.get('/:id', async (req, res) => {
   try {
-    const deletedRowsCount = await albumRepo.deleteAlbumById(req.params.id);
-    if (deletedRowsCount === 0) {
-      return res.status(404).json({ error: 'Album not found' });
-    }
-    res.json({ message: 'Album deleted successfully' });
+    const album = await albumRepo.getAlbumById(req.params.id);
+    res.json(album);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to get all albums
+router.get('/', async (req, res) => {
+  try {
+    const albums = await albumRepo.getAllAlbums();
+    res.json(albums);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -30,6 +37,16 @@ router.put('/:id', async (req, res) => {
   try {
     const updatedAlbum = await albumRepo.updateAlbumById(req.params.id, req.body);
     res.json(updatedAlbum);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route to delete an album by ID
+router.delete('/:id', async (req, res) => {
+  try {
+    await albumRepo.deleteAlbumById(req.params.id);
+    res.json({ message: 'Album deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -1,0 +1,86 @@
+.sidebar {
+    width: 300px;
+    background-color: #121212;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .menu-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    color: #b3b3b3;
+    text-decoration: none;
+  }
+  
+  .menu-item.active {
+    color: #fff;
+  }
+  
+  .menu-item i {
+    margin-right: 10px;
+  }
+  
+  .library {
+    flex-grow: 1;
+  }
+  
+  .library h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .library-tabs {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .library-tab {
+    margin-right: 20px;
+    cursor: pointer;
+    color: #b3b3b3;
+    text-decoration: none;
+  }
+  
+  .library-tab.active {
+    color: #fff;
+  }
+  
+  .library-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .library-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #b3b3b3;
+    text-decoration: none;
+  }
+  
+  .library-item.active {
+    color: #fff;
+  }
+  
+  .create-playlist {
+    margin-top: 20px;
+  }
+  
+  .create-playlist button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1db954;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+  }  

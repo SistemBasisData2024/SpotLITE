@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const db = require('./config/db');
 const homeRoute = require('./routes/HomeRoute');
 const playlistRoute = require('./routes/PlaylistRoute');
@@ -12,6 +13,14 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
+
+// Configure CORS
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from this origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 // Routes
 app.use('/home', homeRoute);

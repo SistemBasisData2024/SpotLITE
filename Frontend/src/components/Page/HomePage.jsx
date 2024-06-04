@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './HomePage.css';
 
 const HomePage = () => {
-  const [popularSongs, setPopularSongs] = useState([]);
+  const [songs, setSongs] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchPopularSongs = async () => {
+    const fetchPopularSongsAndArtists = async () => {
       try {
-        const response = await axios.get('/home');
-        setPopularSongs(response.data);
-      } catch (error) {
-        console.error('Error fetching popular songs:', error);
+        const response = await axios.get('http://localhost:3000/home');
+        setSongs(response.data);
+      } catch (err) {
+        setError('Error fetching popular songs and artists');
       }
     };
 
-    fetchPopularSongs();
+    fetchPopularSongsAndArtists();
   }, []);
 
   return (
-    <div className="home-page">
+    <div className="homepage-container">
       <aside className="sidebar">
         <div className="sidebar-header">
           <div className="sidebar-logo">
@@ -41,21 +42,12 @@ const HomePage = () => {
         </div>
       </aside>
       <main className="main-content">
-        <div className="playlist-header">
-          <img src="playlist-cover-url.jpg" alt="Playlist Cover" className="playlist-cover" />
-          <div className="playlist-info">
-            <h1>Lagu Viral Trending</h1>
-            <p>Kumpulan lagu viral yang bolak balik muncul di FYP kamu bisa kamu dengerin disini nih! Save playlistnya...</p>
-            <div className="playlist-buttons">
-              <button className="btn-play">Play</button>
-              <button className="btn-follow">Follow</button>
-            </div>
-          </div>
-        </div>
+        <h2>FYP Lagu Viral</h2>
+        {error && <div className="error-message">{error}</div>}
         <div className="song-list">
-          {popularSongs.map((song) => (
+          {songs.map((song) => (
             <div key={song.id} className="song-card">
-              <img src={song.cover_url} alt={song.title} className="song-cover" />
+              <img src={song.cover_image} alt={song.title} className="song-cover" />
               <div className="song-details">
                 <h3>{song.title}</h3>
                 <p>{song.artist_name}</p>

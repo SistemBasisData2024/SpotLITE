@@ -1,0 +1,92 @@
+.homepage-container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.header-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
+  opacity: 0.6;
+}
+
+.upgrade-button {
+  padding: 2px 16px;
+  border: 1px solid #727272;
+  border-radius: 25px;
+  background: none;
+  color: white;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.5px 2px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 23px;
+}
+
+.profile-name {
+  color: white;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+}
+
+.profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px 2px;
+  background: #535353;
+  border-radius: 14px;
+}
+
+.song-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.song-card {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.song-cover {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.song-details h3,
+.song-details p {
+  margin: 10px 0;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 15px;
+}

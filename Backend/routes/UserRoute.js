@@ -2,6 +2,14 @@ const express = require('express');
 const router = express.Router();
 const userRepo = require('../repositories/UserRepo');
 
+// Middleware to handle CORS for this route
+router.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
+
 // Route to sign up a new user
 router.post('/signup', async (req, res) => {
   try {

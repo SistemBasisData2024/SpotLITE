@@ -1,45 +1,36 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from './App.jsx'
-import './index.css'
-import AlbumPage from "./components/AlbumPage.jsx";
-import ArtistPage from "./components/ArtistPage.jsx";
-import HomePage from "./components/HomePage.jsx";
-import PlaylistPage from "./components/PlaylistPage.jsx";
-import PlayMusicPage from "./components/PlayMusicPage.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import App from './App';
+import './index.css';
+import AlbumPage from './components/AlbumPage';
+import ArtistPage from './components/ArtistPage';
+import HomePage from './components/HomePage';
+import PlaylistPage from './components/PlaylistPage';
+import PlayMusicPage from './components/PlayMusicPage';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "album",
-        element: <AlbumPage />,
-      },
-      {
-        path: "artist",
-        element: <ArtistPage />,
-      },
-      {
-        path: "playlist",
-        element: <PlaylistPage />,
-      },
-      {
-        path: "playmusic",
-        element: <PlayMusicPage />,
-      },
-    ],
-  },
-]);
+const Main = () => {
+  return (
+    <Router>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<HomePage />} />
+            <Route path="album" element={<AlbumPage />} />
+            <Route path="artist" element={<ArtistPage />} />
+            <Route path="playlist" element={<PlaylistPage />} />
+            <Route path="playmusic" element={<PlayMusicPage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+          </Route>
+        </Routes>
+    </Router>
+  );
+};
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Main />
   </React.StrictMode>
 );

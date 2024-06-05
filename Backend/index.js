@@ -12,6 +12,7 @@ const userRoute = require('./routes/UserRoute');
 dotenv.config();
 
 const app = express();
+const bodyParser = require('body-parser');
 app.use(express.json());
 app.use(bodyParser.json());
 

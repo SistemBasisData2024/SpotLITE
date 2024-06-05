@@ -6,20 +6,22 @@ import './ArtistPage.css';
 const ArtistPage = () => {
   const { id } = useParams();
   const [artist, setArtist] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchArtist = async () => {
       try {
         const response = await axios.get(`/api/artists/${id}`);
         setArtist(response.data);
-      } catch (error) {
-        console.error('Error fetching artist:', error);
+      } catch (err) {
+        setError('Error fetching artist data');
       }
     };
 
     fetchArtist();
   }, [id]);
 
+  if (error) return <div className="error-message">{error}</div>;
   if (!artist) return <div>Loading...</div>;
 
   return (
@@ -32,23 +34,30 @@ const ArtistPage = () => {
       </div>
       <div className="artist-content">
         <h2>Songs</h2>
-        <ul>
+        <ul className="artist-list">
           {artist.songs && artist.songs.map((song) => (
             <li key={song.id}>
               <div className="song">
-                <p>{song.title}</p>
-                <p>{song.plays} plays</p>
+                <div>
+                  <p className="song-title">{song.title}</p>
+                  {song.artists && (
+                    <p className="song-artists">
+                      {song.artists.map((artist) => artist.name).join(', ')}
+                    </p>
+                  )}
+                </div>
+                <p className="song-plays">{song.plays} plays</p>
               </div>
             </li>
           ))}
         </ul>
         <h2>Albums</h2>
-        <ul>
+        <ul className="artist-list">
           {artist.albums && artist.albums.map((album) => (
             <li key={album.id}>
               <div className="album">
-                <p>{album.title}</p>
-                <p>{album.releaseDate}</p>
+                <p className="album-title">{album.title}</p>
+                <p className="album-release-date">{album.releaseDate}</p>
               </div>
             </li>
           ))}

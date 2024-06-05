@@ -1,7 +1,11 @@
 .create-playlist-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #fff;
   background-color: #181818;
   padding: 20px;
+  width: 100%;
   height: 100vh;
   overflow-y: auto;
 }
@@ -13,6 +17,7 @@
 
 .create-playlist-page input[type="text"] {
   width: 100%;
+  max-width: 500px;
   padding: 10px;
   margin-bottom: 20px;
   border: none;
@@ -22,10 +27,22 @@
 .create-playlist-page ul {
   list-style: none;
   padding: 0;
+  width: 100%;
+  max-width: 500px;
 }
 
 .create-playlist-page li {
   margin-bottom: 10px;
+}
+
+.create-playlist-page label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.create-playlist-page input[type="checkbox"] {
+  margin-right: 10px;
 }
 
 .create-playlist-page button {
@@ -35,4 +52,14 @@
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-playlist-page button:hover {
+  background-color: #1ed760;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
 }

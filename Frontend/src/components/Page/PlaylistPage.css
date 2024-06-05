@@ -1,16 +1,19 @@
 .playlist-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: #fff;
   background-color: #181818;
   padding: 20px;
-  height: 100vh;
   width: 100%;
-  overflow-y: auto;
 }
 
 .playlist-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .playlist-image {
@@ -19,6 +22,7 @@
   background-size: cover;
   background-position: center;
   margin-right: 20px;
+  border-radius: 10px;
 }
 
 .playlist-info {
@@ -27,13 +31,13 @@
 }
 
 .playlist-title {
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: bold;
 }
 
 .playlist-owner,
 .playlist-details {
-  font-size: 1em;
+  font-size: 1.2em;
   margin-top: 5px;
 }
 
@@ -41,6 +45,9 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+  justify-content: space-between;
 }
 
 .play-button,
@@ -52,12 +59,21 @@
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.play-button:hover,
+.shuffle-button:hover {
+  background-color: #1ed760;
 }
 
 .playlist-songs {
+  width: 100%;
+  max-width: 800px;
   background-color: #121212;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 20px;
+  overflow-x: auto;
 }
 
 table {
@@ -69,6 +85,7 @@ th,
 td {
   padding: 10px;
   text-align: left;
+  white-space: nowrap;
 }
 
 thead {
@@ -81,4 +98,10 @@ tbody tr {
 
 tbody tr:hover {
   background-color: #282828;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
 }

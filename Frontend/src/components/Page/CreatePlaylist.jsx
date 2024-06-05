@@ -6,21 +6,23 @@ const CreatePlaylistPage = () => {
   const [name, setName] = useState('');
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
-  
+  const [error, setError] = useState('');
+
   useEffect(() => {
     const fetchSongs = async () => {
       try {
         const response = await axios.get('/api/songs');
         setSongs(Array.isArray(response.data) ? response.data : []);
-      } catch (error) {
-        console.error('Error fetching songs:', error);
+      } catch (err) {
+        console.error('Error fetching songs:', err);
+        setError('Error fetching songs');
         setSongs([]); // Ensure songs is always an array
       }
     };
 
     fetchSongs();
   }, []);
-  
+
   const handleCreatePlaylist = async () => {
     try {
       await axios.post('/api/playlists', {
@@ -28,8 +30,9 @@ const CreatePlaylistPage = () => {
         songs: selectedSongs,
       });
       alert('Playlist created successfully!');
-    } catch (error) {
-      console.error('Error creating playlist:', error);
+    } catch (err) {
+      console.error('Error creating playlist:', err);
+      setError('Error creating playlist');
     }
   };
 
@@ -50,6 +53,7 @@ const CreatePlaylistPage = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      {error && <div className="error-message">{error}</div>}
       <h3>Select Songs</h3>
       <ul>
         {songs.length > 0 ? (

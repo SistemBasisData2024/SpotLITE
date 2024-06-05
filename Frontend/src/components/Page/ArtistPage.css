@@ -8,15 +8,9 @@
   width: 100%;
 }
 
-.sidebar {
-  width: 300px;
-  background-color: #121212;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-}
 .artist-header {
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   height: 300px;
   background-size: cover;
   background-position: center;
@@ -24,6 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 }
 
 .overlay {
@@ -36,6 +31,7 @@
   align-items: center;
   text-align: center;
   padding: 20px;
+  border-radius: 10px;
 }
 
 .artist-name {
@@ -43,8 +39,9 @@
   font-weight: bold;
 }
 
-.artist-bio, .artist-listeners {
+.artist-bio {
   font-size: 1.2em;
+  margin-top: 10px;
 }
 
 .artist-content {
@@ -56,11 +53,14 @@
 h2 {
   font-size: 2em;
   margin-bottom: 10px;
+  border-bottom: 2px solid #fff;
+  padding-bottom: 5px;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
@@ -80,6 +80,18 @@ li {
   width: 100%;
 }
 
-.song p, .album p {
-  margin: 0;
+.song-title, .album-title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.song-artists, .song-plays, .album-release-date {
+  font-size: 0.9em;
+  color: #bbb;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 20px;
 }

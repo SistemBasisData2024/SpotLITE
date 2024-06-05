@@ -37,6 +37,11 @@
   overflow-y: auto;
 }
 
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
 .song-list {
   display: flex;
   flex-wrap: wrap;
@@ -49,6 +54,11 @@
   padding: 20px;
   width: 200px;
   text-align: center;
+  transition: transform 0.2s;
+}
+
+.song-card:hover {
+  transform: scale(1.05);
 }
 
 .song-cover {
@@ -64,4 +74,9 @@
 
 .song-details p {
   color: #b3b3b3;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
 }

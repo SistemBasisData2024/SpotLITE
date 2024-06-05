@@ -6,20 +6,22 @@ import './PlaylistPage.css';
 const PlaylistPage = () => {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchPlaylist = async () => {
       try {
         const response = await axios.get(`/api/playlists/${id}`);
         setPlaylist(response.data);
-      } catch (error) {
-        console.error('Error fetching playlist:', error);
+      } catch (err) {
+        setError('Error fetching playlist data');
       }
     };
 
     fetchPlaylist();
   }, [id]);
 
+  if (error) return <div className="error-message">{error}</div>;
   if (!playlist) return <div>Loading...</div>;
 
   return (

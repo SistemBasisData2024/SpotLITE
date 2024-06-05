@@ -1,39 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import './PlayMusicPage.css';
 
-const PlayMusicPage = () => {
-  const [currentSong, setCurrentSong] = useState({
-    title: 'Example Song',
-    artist: 'Example Artist',
-    albumCover: 'https://via.placeholder.com/150', // Placeholder image URL
-    audioUrl: 'path_to_your_audio_file.mp3' // Replace with the actual audio file path
-  });
-  const audioRef = useRef(null);
-
-  const handlePlay = () => {
-    audioRef.current.play();
-  };
-
-  const handlePause = () => {
-    audioRef.current.pause();
-  };
-
+const MusicPlayer = () => {
   return (
-    <div className="play-music-container">
-      <div className="music-info">
-        <img src={currentSong.albumCover} alt="Album Cover" className="album-cover" />
+    <div className="music-player">
+      <div className="song-info">
+        <img src="song_image_url" alt="Song" className="song-image" />
         <div className="song-details">
-          <h2>{currentSong.title}</h2>
-          <p>{currentSong.artist}</p>
+          <span className="song-title">GMFU - Sped Up</span>
+          <span className="song-artist">ODECORE, Sassy Scene, Odetari, 6arelyhuman</span>
         </div>
       </div>
       <div className="controls">
-        <button onClick={handlePlay}>Play</button>
-        <button onClick={handlePause}>Pause</button>
+        <button className="control-button">Shuffle</button>
+        <button className="control-button">⏮</button>
+        <button className="control-button">▶/⏸</button>
+        <button className="control-button">⏭</button>
+        <button className="control-button">↻</button>
       </div>
-      <audio ref={audioRef} src={currentSong.audioUrl} />
+      <div className="progress-bar">
+        <span>1:11</span>
+        <input type="range" min="0" max="100" />
+        <span>1:43</span>
+      </div>
     </div>
   );
 };
 
-export default PlayMusicPage;
+export default MusicPlayer;

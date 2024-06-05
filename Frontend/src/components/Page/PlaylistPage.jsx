@@ -1,62 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './PlaylistPage.css';
 
 const PlaylistPage = () => {
-  const [playlists, setPlaylists] = useState([]);
-  const [newPlaylistName, setNewPlaylistName] = useState('');
+  const { id } = useParams();
+  const [playlist, setPlaylist] = useState(null);
 
   useEffect(() => {
-    const fetchPlaylists = async () => {
+    const fetchPlaylist = async () => {
       try {
-        const response = await axios.get('/playlists');
-        setPlaylists(response.data);
+        const response = await axios.get(`/api/playlists/${id}`);
+        setPlaylist(response.data);
       } catch (error) {
-        console.error('Error fetching playlists:', error);
+        console.error('Error fetching playlist:', error);
       }
     };
 
-    fetchPlaylists();
-  }, []);
+    fetchPlaylist();
+  }, [id]);
 
-  const handleCreatePlaylist = async () => {
-    try {
-      const response = await axios.post('/playlists', { name: newPlaylistName });
-      setPlaylists([...playlists, response.data]);
-      setNewPlaylistName('');
-    } catch (error) {
-      console.error('Error creating playlist:', error);
-    }
-  };
-
-  const handleDeletePlaylist = async (id) => {
-    try {
-      await axios.delete(`/playlists/${id}`);
-      setPlaylists(playlists.filter(playlist => playlist._id !== id));
-    } catch (error) {
-      console.error('Error deleting playlist:', error);
-    }
-  };
+  if (!playlist) return <div>Loading...</div>;
 
   return (
-    <div className="playlist-container">
-      <h1>Playlists</h1>
-      <div className="playlist-form">
-        <input
-          type="text"
-          placeholder="Enter playlist name"
-          value={newPlaylistName}
-          onChange={(e) => setNewPlaylistName(e.target.value)}
-        />
-        <button onClick={handleCreatePlaylist}>Create Playlist</button>
+    <div className="playlist-page">
+      <div className="playlist-header">
+        <div className="playlist-image" style={{ backgroundImage: `url(${playlist.image})` }}></div>
+        <div className="playlist-info">
+          <h2 className="playlist-title">{playlist.name}</h2>
+          <p className="playlist-owner">by {playlist.owner}</p>
+          <p className="playlist-details">{playlist.songs ? playlist.songs.length : 0} songs, {playlist.duration}</p>
+        </div>
       </div>
-      <div className="playlist-list">
-        {playlists.map((playlist, index) => (
-          <div key={index} className="playlist-card">
-            <h3>{playlist.name}</h3>
-            <button onClick={() => handleDeletePlaylist(playlist._id)}>Delete</button>
-          </div>
-        ))}
+      <div className="playlist-controls">
+        <button className="play-button">Play</button>
+        <button className="shuffle-button">Shuffle</button>
+      </div>
+      <div className="playlist-songs">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Album</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            {playlist.songs && playlist.songs.map((song, index) => (
+              <tr key={song.id}>
+                <td>{index + 1}</td>
+                <td>{song.title}</td>
+                <td>{song.album}</td>
+                <td>{song.duration}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

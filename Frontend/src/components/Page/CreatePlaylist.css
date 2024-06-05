@@ -1,0 +1,38 @@
+.create-playlist-page {
+  color: #fff;
+  background-color: #181818;
+  padding: 20px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.create-playlist-page h2,
+.create-playlist-page h3 {
+  margin-bottom: 20px;
+}
+
+.create-playlist-page input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.create-playlist-page ul {
+  list-style: none;
+  padding: 0;
+}
+
+.create-playlist-page li {
+  margin-bottom: 10px;
+}
+
+.create-playlist-page button {
+  padding: 10px 20px;
+  background-color: #1db954;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}

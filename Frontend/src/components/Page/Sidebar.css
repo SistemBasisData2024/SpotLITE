@@ -1,10 +1,12 @@
 .sidebar {
-    width: 300px;
+    width: 100%;
     background-color: #121212;
     padding: 20px;
     display: flex;
     flex-direction: column;
     color: #fff;
+    height: 100%;
+    box-sizing: border-box;
   }
   
   .menu {
@@ -71,16 +73,9 @@
     color: #fff;
   }
   
-  .create-playlist {
-    margin-top: 20px;
-  }
-  
-  .create-playlist button {
-    width: 100%;
-    padding: 10px;
-    background-color: #1db954;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
   }  

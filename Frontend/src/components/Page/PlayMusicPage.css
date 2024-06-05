@@ -1,36 +1,68 @@
-.play-music-container {
-    display: flex;
+.music-player {
+  background-color: #181818;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-top: 1px solid #282828;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.song-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.song-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title, .song-artist {
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.control-button {
+  background: none;
+  border: none;
+  color: #fff;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.progress-bar input {
+  margin: 0 10px;
+}
+
+@media (max-width: 768px) {
+  .music-player {
     flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    align-items: flex-start;
   }
-  
-  .music-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  .controls, .progress-bar {
+    width: 100%;
+    justify-content: space-around;
   }
-  
-  .album-cover {
-    width: 150px;
-    height: 150px;
-    margin-right: 20px;
-  }
-  
-  .song-details h2,
-  .song-details p {
-    margin: 0;
-  }
-  
-  .controls button {
-    padding: 10px 20px;
-    margin: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .controls button:hover {
-    background-color: #0056b3;
-  }  
+}

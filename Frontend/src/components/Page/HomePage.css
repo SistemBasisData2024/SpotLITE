@@ -1,65 +1,40 @@
 .homepage-container {
+  display: flex;
+  height: 100vh;
+  background-color: #121212;
+  color: #fff;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #181818;
   padding: 20px;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-}
-
-.header-buttons {
-  display: flex;
-  gap: 4px;
-}
-
-.header-button {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 16px;
-  opacity: 0.6;
-}
-
-.upgrade-button {
-  padding: 2px 16px;
-  border: 1px solid #727272;
-  border-radius: 25px;
-  background: none;
-  color: white;
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
-}
-
-.profile {
+.sidebar-header {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 0.5px 2px;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 23px;
+  margin-bottom: 20px;
 }
 
-.profile-name {
-  color: white;
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  font-weight: bold;
+.sidebar-logo {
+  font-size: 24px;
+  margin-right: 10px;
 }
 
-.profile-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1px 2px;
-  background: #535353;
-  border-radius: 14px;
+.sidebar-search input {
+  width: 100%;
+  padding: 10px;
+  background-color: #282828;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 .song-list {
@@ -69,24 +44,24 @@
 }
 
 .song-card {
-  background-color: #333;
-  padding: 10px;
-  border-radius: 10px;
+  background-color: #282828;
+  border-radius: 8px;
+  padding: 20px;
   width: 200px;
   text-align: center;
 }
 
 .song-cover {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.song-details h3,
-.song-details p {
+.song-details h3 {
   margin: 10px 0;
+  font-size: 16px;
 }
 
-.error-message {
-  color: red;
-  margin-bottom: 15px;
+.song-details p {
+  color: #b3b3b3;
 }

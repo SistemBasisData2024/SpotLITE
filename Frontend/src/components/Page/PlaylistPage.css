@@ -1,82 +1,84 @@
-.playlist-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .playlist-form input[type="text"] {
-    width: 200px;
-    margin-right: 10px;
-  }
-  
-  .playlist-form button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .playlist-list {
-    margin-top: 20px;
-  }
-  
-  .playlist-card {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .playlist-card h3 {
-    margin-top: 0;
-  }
-  
-  .playlist-card button {
-    padding: 5px 10px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-/* PlaylistPage.css */
+.playlist-page {
+  color: #fff;
+  background-color: #181818;
+  padding: 20px;
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+}
 
-.playlist-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .playlist-form input[type="text"] {
-    width: 200px;
-    margin-right: 10px;
-  }
-  
-  .playlist-form button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .playlist-list {
-    margin-top: 20px;
-  }
-  
-  .playlist-card {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .playlist-card h3 {
-    margin-top: 0;
-  }
-  
-  .playlist-card button {
-    padding: 5px 10px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }    
+.playlist-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.playlist-image {
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 20px;
+}
+
+.playlist-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.playlist-owner,
+.playlist-details {
+  font-size: 1em;
+  margin-top: 5px;
+}
+
+.playlist-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.play-button,
+.shuffle-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #1db954;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.playlist-songs {
+  background-color: #121212;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+thead {
+  border-bottom: 1px solid #282828;
+}
+
+tbody tr {
+  border-bottom: 1px solid #282828;
+}
+
+tbody tr:hover {
+  background-color: #282828;
+}

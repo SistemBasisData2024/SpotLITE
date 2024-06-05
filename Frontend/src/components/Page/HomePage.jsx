@@ -30,19 +30,9 @@ const HomePage = () => {
             <input type="text" placeholder="Search" />
           </div>
         </div>
-        <div className="sidebar-library">
-          <h2>Your Library</h2>
-          <ul className="library-items">
-            <li className="library-item">
-              <i className="fas fa-heart"></i>
-              <span>Liked Songs</span>
-            </li>
-            {/* Add more items here */}
-          </ul>
-        </div>
       </aside>
       <main className="main-content">
-        <h2>FYP Lagu Viral</h2>
+        <h2>Populer</h2>
         {error && <div className="error-message">{error}</div>}
         <div className="song-list">
           {songs.map((song) => (

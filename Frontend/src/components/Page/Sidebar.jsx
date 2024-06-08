@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { UserContext } from '../../context/UserContext'; // Ensure the path is correct
+import { UserContext } from '../../context/UserContext';
 import './Sidebar.css';
 
 const Sidebar = () => {
@@ -20,7 +20,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const response = await axios.get('/api/playlists');
+        const response = await axios.get('http://localhost:3000/playlists');
         setPlaylists(response.data);
       } catch (error) {
         console.error('Error fetching playlists:', error);
@@ -30,7 +30,7 @@ const Sidebar = () => {
 
     const fetchArtists = async () => {
       try {
-        const response = await axios.get('/api/artists');
+        const response = await axios.get('http://localhost:3000/artists');
         setArtists(response.data);
       } catch (error) {
         console.error('Error fetching artists:', error);
@@ -70,14 +70,14 @@ const Sidebar = () => {
         <ul className="library-list">
           {location.pathname.includes('/playlists') && 
             Array.isArray(playlists) && playlists.map((playlist) => (
-              <NavLink to={`/playlist/${playlist.id}`} className="library-item" activeclassname="active" key={playlist.id}>
+              <NavLink to={`/playlists/${playlist.id}`} className="library-item" activeclassname="active" key={playlist.id}>
                 {playlist.name}
               </NavLink>
             ))
           }
           {location.pathname.includes('/artists') && 
             Array.isArray(artists) && artists.map((artist) => (
-              <NavLink to={`/artist/${artist.id}`} className="library-item" activeclassname="active" key={artist.id}>
+              <NavLink to={`/artists/${artist.id}`} className="library-item" activeclassname="active" key={artist.id}>
                 {artist.name}
               </NavLink>
             ))

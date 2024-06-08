@@ -1,33 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PlaylistPage.css';
 
 const PlaylistPage = () => {
   const { id } = useParams();
+  const [playlists, setPlaylists] = useState([]);
   const [playlist, setPlaylist] = useState(null);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPlaylist = async () => {
+    const fetchAllPlaylists = async () => {
       try {
-        const response = await axios.get(`/api/playlists/${id}`);
-        setPlaylist(response.data);
+        const response = await axios.get('http://localhost:3000/playlists');
+        setPlaylists(response.data);
       } catch (err) {
-        setError('Error fetching playlist data');
+        setError('Error fetching playlists data');
+        console.error('Error fetching playlists data:', err);
       }
     };
 
-    fetchPlaylist();
+    const fetchPlaylistById = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/playlists/${id}`);
+        setPlaylist(response.data);
+      } catch (err) {
+        setError('Error fetching playlist data');
+        console.error('Error fetching playlist data:', err);
+      }
+    };
+
+    if (id) {
+      fetchPlaylistById();
+    } else {
+      fetchAllPlaylists();
+    }
   }, [id]);
 
+  const handlePlaylistClick = (id) => {
+    navigate(`/playlists/${id}`);
+  };
+
   if (error) return <div className="error-message">{error}</div>;
+
+  if (!id) {
+    return (
+      <div className="playlists-page">
+        <h1>All Playlists</h1>
+        <div className="playlists-list">
+          {playlists.map((playlist) => (
+            <div
+              key={playlist.id}
+              className="playlist-card"
+              onClick={() => handlePlaylistClick(playlist.id)}
+            >
+              <div className="playlist-name">{playlist.name}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   if (!playlist) return <div>Loading...</div>;
+
+  const handleEdit = () => {
+    navigate(`/create-playlist?edit=${id}`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/playlists/${id}`);
+      navigate('/playlists');
+    } catch (err) {
+      setError('Error deleting playlist');
+    }
+  };
 
   return (
     <div className="playlist-page">
       <div className="playlist-header">
-        <div className="playlist-image" style={{ backgroundImage: `url(${playlist.image})` }}></div>
         <div className="playlist-info">
           <h2 className="playlist-title">{playlist.name}</h2>
           <p className="playlist-owner">by {playlist.owner}</p>
@@ -36,7 +89,8 @@ const PlaylistPage = () => {
       </div>
       <div className="playlist-controls">
         <button className="play-button">Play</button>
-        <button className="shuffle-button">Shuffle</button>
+        <button className="edit-button" onClick={handleEdit}>Edit</button>
+        <button className="delete-button" onClick={handleDelete}>Delete</button>
       </div>
       <div className="playlist-songs">
         <table>

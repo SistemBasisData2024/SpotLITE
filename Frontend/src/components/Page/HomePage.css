@@ -1,81 +1,30 @@
-.homepage-container {
-  display: flex;
-  background-color: #121212;
-  color: #fff;
-}
-
-.sidebar {
-  width: 250px;
-  background-color: #181818;
+.home-page {
   padding: 20px;
 }
 
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.sidebar-logo {
-  font-size: 24px;
-  margin-right: 10px;
-}
-
-.sidebar-search input {
-  width: 100%;
-  padding: 10px;
-  background-color: #282828;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-}
-
-.main-content {
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.song-list {
+.songs-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
 .song-card {
-  background-color: #282828;
-  border-radius: 8px;
-  padding: 20px;
-  width: 200px;
+  width: 150px;
+  cursor: pointer;
   text-align: center;
-  transition: transform 0.2s;
 }
 
-.song-card:hover {
-  transform: scale(1.05);
-}
-
-.song-cover {
+.song-image {
   width: 100%;
-  border-radius: 4px;
-  margin-bottom: 10px;
+  height: auto;
 }
 
-.song-details h3 {
-  margin: 10px 0;
-  font-size: 16px;
+.song-title {
+  font-size: 1em;
+  margin-top: 10px;
 }
 
-.song-details p {
-  color: #b3b3b3;
-}
-
-.error-message {
-  color: red;
-  margin-bottom: 20px;
+.song-artist {
+  font-size: 0.9em;
+  color: #aaa;
 }

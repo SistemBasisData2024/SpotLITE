@@ -53,7 +53,7 @@ const userLogin = async (userData) => {
 // Function to get a user by ID
 const getUserById = async (userId) => {
   try {
-    const query = `SELECT email, username FROM users WHERE id = $1`;
+    const query = `SELECT username, email FROM users WHERE id = $1`;
     const result = await pool.query(query, [userId]);
 
     if (result.rows.length === 0) {
@@ -66,43 +66,8 @@ const getUserById = async (userId) => {
   }
 };
 
-// Function to update a user by ID
-const updateUserById = async (userId, updatedUserData) => {
-  const { username, email, password } = updatedUserData;
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const result = await pool.query(
-      'UPDATE users SET username = $1, email = $2, password = $3 WHERE id = $4 RETURNING *',
-      [username, email, hashedPassword, userId]
-    );
-
-    if (result.rows.length === 0) {
-      throw new Error('User not found');
-    }
-
-    return result.rows[0];
-  } catch (error) {
-    throw new Error(`Error updating user: ${error.message}`);
-  }
-};
-
-// Function to delete a user by ID
-const deleteUserById = async (userId) => {
-  try {
-    const result = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *', [userId]);
-    if (result.rows.length === 0) {
-      throw new Error('User not found');
-    }
-    return result.rows[0];
-  } catch (error) {
-    throw new Error(`Error deleting user: ${error.message}`);
-  }
-};
-
 module.exports = {
   userSignup,
   userLogin,
   getUserById,
-  updateUserById,
-  deleteUserById,
 };

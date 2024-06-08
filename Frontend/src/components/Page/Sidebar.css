@@ -63,6 +63,7 @@
   }
   
   .library-item {
+    display: block;
     margin-bottom: 10px;
     cursor: pointer;
     color: #b3b3b3;

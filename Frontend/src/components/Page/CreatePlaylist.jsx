@@ -1,38 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './CreatePlaylist.css';
 
 const CreatePlaylistPage = () => {
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isEditing = location.search.includes('edit');
+  const playlistId = isEditing ? new URLSearchParams(location.search).get('edit') : null;
 
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const response = await axios.get('/api/songs');
-        setSongs(Array.isArray(response.data) ? response.data : []);
+        const response = await axios.get('http://localhost:3000/songs');
+        setSongs(response.data);
       } catch (err) {
-        console.error('Error fetching songs:', err);
         setError('Error fetching songs');
-        setSongs([]); // Ensure songs is always an array
+      }
+    };
+
+    const fetchPlaylist = async () => {
+      if (playlistId) {
+        try {
+          const response = await axios.get(`http://localhost:3000/playlists/${playlistId}`);
+          const { name, description, songs } = response.data;
+          setName(name);
+          setDescription(description);
+          setSelectedSongs(songs.map((song) => song.id));
+        } catch (err) {
+          setError('Error fetching playlist data');
+        }
       }
     };
 
     fetchSongs();
-  }, []);
+    if (isEditing) {
+      fetchPlaylist();
+    }
+  }, [playlistId, isEditing]);
 
-  const handleCreatePlaylist = async () => {
+  const handleSavePlaylist = async () => {
     try {
-      await axios.post('/api/playlists', {
+      const payload = {
         name,
-        songs: selectedSongs,
-      });
-      alert('Playlist created successfully!');
+        description,
+        song_ids: selectedSongs,
+      };
+
+      if (isEditing) {
+        await axios.put(`http://localhost:3000/playlists/${playlistId}`, payload);
+      } else {
+        await axios.post('http://localhost:3000/playlists', payload);
+      }
+
+      navigate('/playlists');
     } catch (err) {
-      console.error('Error creating playlist:', err);
-      setError('Error creating playlist');
+      setError('Error saving playlist');
     }
   };
 
@@ -46,13 +75,18 @@ const CreatePlaylistPage = () => {
 
   return (
     <div className="create-playlist-page">
-      <h2>Create Playlist</h2>
+      <h2>{isEditing ? 'Edit Playlist' : 'Create Playlist'}</h2>
       <input
         type="text"
         placeholder="Playlist Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      <textarea
+        placeholder="Playlist Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      ></textarea>
       {error && <div className="error-message">{error}</div>}
       <h3>Select Songs</h3>
       <ul>
@@ -73,7 +107,9 @@ const CreatePlaylistPage = () => {
           <p>No songs available</p>
         )}
       </ul>
-      <button onClick={handleCreatePlaylist}>Create Playlist</button>
+      <button onClick={handleSavePlaylist}>
+        {isEditing ? 'Update Playlist' : 'Create Playlist'}
+      </button>
     </div>
   );
 };

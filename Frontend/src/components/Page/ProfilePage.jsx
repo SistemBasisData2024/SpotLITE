@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { UserContext } from '../../context/UserContext'; // Ensure the path is correct
+import { UserContext } from '../../context/UserContext';
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -11,7 +11,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get(`/api/user/${user.id}`);
+        const response = await axios.get(`http://localhost:3000/user/${user.id}`);
         setUserInfo(response.data);
       } catch (error) {
         console.error('Error fetching user info:', error);

@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const db = require('./config/db');
-const homeRoute = require('./routes/HomeRoute');
+const homeRoute = require('./routes/SongRoute');
 const playlistRoute = require('./routes/PlaylistRoute');
 const artistRoute = require('./routes/ArtistRoute');
 const albumRoute = require('./routes/AlbumRoute');
@@ -18,17 +18,18 @@ app.use(bodyParser.json());
 
 // Configure CORS
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow requests from this origin
+  origin: 'http://localhost:5173', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
 
 // Routes
-app.use('/home', homeRoute);
-app.use('/playlists', playlistRoute);
-app.use('/artists', artistRoute);
-app.use('/albums', albumRoute);
 app.use('/songs', songRoute);
+app.use('/playlists', playlistRoute);
+app.use('/playlists/:id', playlistRoute);
+app.use('/artists', artistRoute);
+app.use('/artists/:id', artistRoute);
+app.use('/albums', albumRoute);
 app.use('/user', userRoute);
 
 // Start Server

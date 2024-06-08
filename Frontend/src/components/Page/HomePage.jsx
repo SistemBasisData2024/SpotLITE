@@ -1,51 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import MusicPlayer from './PlayMusic';
 import './HomePage.css';
 
 const HomePage = () => {
   const [songs, setSongs] = useState([]);
-  const [error, setError] = useState('');
+  const [selectedSong, setSelectedSong] = useState(null);
 
   useEffect(() => {
-    const fetchPopularSongsAndArtists = async () => {
+    const fetchSongs = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/home');
+        const response = await axios.get('http://localhost:3000/songs');
         setSongs(response.data);
-      } catch (err) {
-        setError('Error fetching popular songs and artists');
+      } catch (error) {
+        console.error('Error fetching songs:', error);
       }
     };
 
-    fetchPopularSongsAndArtists();
+    fetchSongs();
   }, []);
 
+  const handleSongClick = (song) => {
+    setSelectedSong(song);
+  };
+
   return (
-    <div className="homepage-container">
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <div className="sidebar-logo">
-            <i className="fas fa-home"></i>
-          </div>
-          <div className="sidebar-search">
-            <input type="text" placeholder="Search" />
-          </div>
-        </div>
-      </aside>
-      <main className="main-content">
-        <h2>Populer</h2>
-        {error && <div className="error-message">{error}</div>}
-        <div className="song-list">
-          {songs.map((song) => (
-            <div key={song.id} className="song-card">
-              <img src={song.cover_image} alt={song.title} className="song-cover" />
-              <div className="song-details">
-                <h3>{song.title}</h3>
-                <p>{song.artist_name}</p>
-              </div>
+    <div className="home-page">
+      <h2>All Musics</h2>
+      <div className="songs-list">
+        {songs.map((song) => (
+          <div className="song-card" key={song.id} onClick={() => handleSongClick(song)}>
+            <img src={song.cover_url} alt={song.title} className="song-image" />
+            <div className="song-info">
+              <p className="song-title">{song.title}</p>
+              <p className="song-artist">{song.artist_name}</p>
             </div>
-          ))}
-        </div>
-      </main>
+          </div>
+        ))}
+      </div>
+      {selectedSong && <MusicPlayer song={selectedSong} />}
     </div>
   );
 };

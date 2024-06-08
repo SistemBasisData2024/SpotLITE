@@ -1,4 +1,5 @@
-.playlist-page {
+/* General styles */
+.playlists-page, .playlist-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,21 +9,44 @@
   width: 100%;
 }
 
+.playlists-list, .playlist-songs {
+  width: 100%;
+  max-width: 800px;
+}
+
+.playlists-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.playlist-card {
+  background: #282828;
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.playlist-card:hover {
+  background: #1db954;
+}
+
+.playlist-name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Single playlist details styles */
 .playlist-header {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
   max-width: 800px;
-}
-
-.playlist-image {
-  width: 150px;
-  height: 150px;
-  background-size: cover;
-  background-position: center;
-  margin-right: 20px;
-  border-radius: 10px;
 }
 
 .playlist-info {
@@ -35,8 +59,7 @@
   font-weight: bold;
 }
 
-.playlist-owner,
-.playlist-details {
+.playlist-owner, .playlist-details {
   font-size: 1.2em;
   margin-top: 5px;
 }
@@ -50,8 +73,7 @@
   justify-content: space-between;
 }
 
-.play-button,
-.shuffle-button {
+.play-button, .edit-button, .delete-button {
   padding: 10px 20px;
   margin-right: 10px;
   background-color: #1db954;
@@ -62,8 +84,7 @@
   transition: background-color 0.3s;
 }
 
-.play-button:hover,
-.shuffle-button:hover {
+.play-button:hover, .edit-button:hover, .delete-button:hover {
   background-color: #1ed760;
 }
 
@@ -81,8 +102,7 @@ table {
   border-collapse: collapse;
 }
 
-th,
-td {
+th, td {
   padding: 10px;
   text-align: left;
   white-space: nowrap;

@@ -10,10 +10,13 @@ import PlaylistPage from './components/Page/PlaylistPage';
 import PlayMusicPage from './components/Page/PlayMusicPage';
 import Login from './components/User/Login';
 import Signup from './components/User/Signup';
+import ProfilePage from './components/Page/ProfilePage';
+import { UserProvider } from './context/UserContext';  // Correct import
 
 const Main = () => {
   return (
-    <Router>
+    <UserProvider>
+      <Router>
         <Routes>
           <Route path="/" element={<App />}>
             <Route path="artists" element={<ArtistPage />} />
@@ -23,9 +26,11 @@ const Main = () => {
             <Route path="signup" element={<Signup />} />
             <Route path="home" element={<HomePage />} />
             <Route path="create-playlist" element={<CreatePlaylist />} />
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
         </Routes>
-    </Router>
+      </Router>
+    </UserProvider>
   );
 };
 

@@ -79,3 +79,65 @@
       height: auto;
     }
   }  
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #282828;
+    padding: 10px 20px;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-logo {
+    height: 40px;
+  }
+  
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    margin-left: 20px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-profile {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .navbar-profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .navbar-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #282828;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .navbar-dropdown li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .navbar-dropdown li:hover {
+    background-color: #333;
+  }  

@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../../context/UserContext'; // Ensure the path is correct
 import './Sidebar.css';
 
 const Sidebar = () => {
+  const { user, setUser } = useContext(UserContext);
   const [playlists, setPlaylists] = useState([]);
   const [artists, setArtists] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+    navigate('/login'); // Redirect to login page after logout
+  };
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -40,6 +49,16 @@ const Sidebar = () => {
           <i className="icon-home"></i>
           <span>Home</span>
         </NavLink>
+        {user && (
+          <NavLink to="/profile" className="menu-item" activeclassname="active">
+            <i className="icon-profile"></i>
+            <span>Profile</span>
+          </NavLink>
+        )}
+        <div className="menu-item" onClick={user ? handleLogout : () => navigate('/login')}>
+          <i className={user ? "icon-logout" : "icon-login"}></i>
+          <span>{user ? "Logout" : "Login now"}</span>
+        </div>
       </div>
       <div className="library">
         <h2>Your Library</h2>

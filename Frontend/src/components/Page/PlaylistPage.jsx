@@ -44,6 +44,17 @@ const PlaylistPage = () => {
     navigate(`/playlists/${id}`);
   };
 
+  const handlePlay = () => {
+    if (playlist && playlist.songs && playlist.songs.length > 0) {
+      const selectedSong = playlist.songs[0];
+      navigate('/home', { state: { selectedSong } });
+    }
+  };
+
+  const handleSongClick = (song) => {
+    navigate('/home', { state: { selectedSong: song } });
+  };
+
   if (error) return <div className="error-message">{error}</div>;
 
   if (!id) {
@@ -90,7 +101,7 @@ const PlaylistPage = () => {
         </div>
       </div>
       <div className="playlist-controls">
-        <button className="play-button">Play</button>
+        <button className="play-button" onClick={handlePlay}>Play</button>
         <button className="edit-button" onClick={handleEdit}>Edit</button>
         <button className="delete-button" onClick={handleDelete}>Delete</button>
       </div>
@@ -108,7 +119,7 @@ const PlaylistPage = () => {
             {playlist.songs && playlist.songs.map((song, index) => (
               <tr key={song.id}>
                 <td>{index + 1}</td>
-                <td>{song.title}</td>
+                <td><button className="song-link" onClick={() => handleSongClick(song)}>{song.title}</button></td>
                 <td>{song.album}</td>
                 <td>{song.duration}</td>
               </tr>

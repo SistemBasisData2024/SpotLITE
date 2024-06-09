@@ -6,7 +6,11 @@ const MusicPlayer = ({ song, onClose, onPrevious, onNext }) => {
     return null;
   }
 
-  const soundCloudUrl = `https://w.soundcloud.com/player/?url=${song.music_url}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+  const soundCloudUrl = `https://w.soundcloud.com/player/?url=${song.music_url}&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=true&visual=true`;
+
+  const handleEnded = () => {
+    onNext(); // Panggil onNext() ketika musik berakhir
+  };
 
   return (
     <div className="music-player">
@@ -18,6 +22,7 @@ const MusicPlayer = ({ song, onClose, onPrevious, onNext }) => {
         frameBorder="no"
         allow="autoplay"
         src={soundCloudUrl}
+        onEnded={handleEnded} // Tambahkan listener event untuk menangani akhir musik
       ></iframe>
       <div style={{ fontSize: '10px', color: '#cccccc', lineBreak: 'anywhere', wordBreak: 'normal', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', fontFamily: 'Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif', fontWeight: '100' }}>
         <a href={song.artist_url} title={song.artist_name} target="_blank" rel="noopener noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>

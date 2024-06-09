@@ -82,12 +82,14 @@ const getPlaylistById = async (playlistId) => {
   }
 };
 
-
+// Function to get all playlists (only id and name)
 const getAllPlaylists = async () => {
   try {
-    const result = await pool.query('SELECT * FROM playlists');
+    const result = await pool.query('SELECT id, name FROM playlists');
+    console.log('Fetched playlist names from database:', result.rows);
     return result.rows;
   } catch (error) {
+    console.error(`Error fetching playlists: ${error.message}`);
     throw new Error(`Error fetching playlists: ${error.message}`);
   }
 };

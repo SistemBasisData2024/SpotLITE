@@ -14,6 +14,7 @@ const PlaylistPage = () => {
     const fetchAllPlaylists = async () => {
       try {
         const response = await axios.get('http://localhost:3000/playlists');
+        console.log('Fetched all playlists:', response.data);
         setPlaylists(response.data);
       } catch (err) {
         setError('Error fetching playlists data');
@@ -24,6 +25,7 @@ const PlaylistPage = () => {
     const fetchPlaylistById = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/playlists/${id}`);
+        console.log('Fetched playlist by ID:', response.data);
         setPlaylist(response.data);
       } catch (err) {
         setError('Error fetching playlist data');

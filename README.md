@@ -36,12 +36,13 @@ Ikuti langkah-langkah berikut untuk menginstal dan menjalankan proyek ini di lin
    cd Backend
    ```
    - Jalankan npm install untuk menginstal semua dependensi
-   ```bash
+      ```bash
      npm install
-   ```
    - Untuk menguji hasil instalasi jalankan
-   ```bash
+      ```bash
      node index.js
 
 ## Progress Report
+![absen1](./Resources/absen1.png)
 
+![absen2](./Resources/absen2.png)

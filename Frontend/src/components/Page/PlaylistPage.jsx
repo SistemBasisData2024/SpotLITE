@@ -83,7 +83,8 @@ const PlaylistPage = () => {
       <div className="playlist-header">
         <div className="playlist-info">
           <h2 className="playlist-title">{playlist.name}</h2>
-          <p className="playlist-details">{playlist.songs ? playlist.songs.length : 0} songs</p>
+          <p className="playlist-owner">by {playlist.owner}</p>
+          <p className="playlist-details">{playlist.songs ? playlist.songs.length : 0} songs, {playlist.duration}</p>
         </div>
       </div>
       <div className="playlist-controls">

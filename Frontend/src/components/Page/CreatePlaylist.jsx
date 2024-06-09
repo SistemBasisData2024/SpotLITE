@@ -79,7 +79,7 @@ const CreatePlaylistPage = () => {
   // Filter songs based on search term
   const filteredSongs = songs.filter(song =>
     (song.title && song.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (song.artist && song.artist.toLowerCase().includes(searchTerm.toLowerCase()))
+    (song.artist_name && song.artist_name.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   return (
@@ -104,7 +104,7 @@ const CreatePlaylistPage = () => {
                   checked={selectedSongs.includes(song.id)}
                   onChange={() => handleSelectSong(song.id)}
                 />
-                {song.title ? song.title : 'Untitled'} - {song.artist ? song.artist : 'Uknown artist'}
+                {song.title ? song.title : 'Untitled'} - {song.artist_name ? song.artist_name : 'Uknown artist'}
               </label>
             </li>
           ))

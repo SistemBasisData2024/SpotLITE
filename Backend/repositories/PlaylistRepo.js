@@ -67,9 +67,10 @@ const getPlaylistById = async (playlistId) => {
     const playlist = playlistResult.rows[0];
 
     const songsResult = await pool.query(
-      `SELECT musics.*
+      `SELECT musics.*, artists.name as artist_name
        FROM musics
        JOIN playlist_songs ON musics.id = playlist_songs.song_id
+       JOIN artists ON musics.artist_id = artists.id
        WHERE playlist_songs.playlist_id = $1`,
       [playlistId]
     );
@@ -80,6 +81,7 @@ const getPlaylistById = async (playlistId) => {
     throw new Error(`Error fetching playlist: ${error.message}`);
   }
 };
+
 
 const getAllPlaylists = async () => {
   try {

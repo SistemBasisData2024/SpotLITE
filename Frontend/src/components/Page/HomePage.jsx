@@ -24,6 +24,10 @@ const HomePage = () => {
     setSelectedSong(song);
   };
 
+  const handleClosePlayer = () => {
+    setSelectedSong(null);
+  };
+
   return (
     <div className="home-page">
       <h2>All Musics</h2>
@@ -38,7 +42,7 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-      {selectedSong && <MusicPlayer song={selectedSong} />}
+      {selectedSong && <MusicPlayer song={selectedSong} onClose={handleClosePlayer} />}
     </div>
   );
 };

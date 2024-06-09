@@ -6,7 +6,6 @@ import './CreatePlaylist.css';
 
 const CreatePlaylistPage = () => {
   const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [error, setError] = useState('');
@@ -31,9 +30,8 @@ const CreatePlaylistPage = () => {
       if (playlistId) {
         try {
           const response = await axios.get(`http://localhost:3000/playlists/${playlistId}`);
-          const { name, description, songs } = response.data;
+          const { name, songs } = response.data;
           setName(name);
-          setDescription(description);
           setSelectedSongs(songs.map((song) => song.id));
         } catch (err) {
           setError('Error fetching playlist data');
@@ -51,7 +49,6 @@ const CreatePlaylistPage = () => {
     try {
       const payload = {
         name,
-        description,
         song_ids: selectedSongs,
       };
 

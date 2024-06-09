@@ -7,8 +7,11 @@ PostgreSQL | JavaScript | HTML | Express.js | NPM | NodeJS | React | TailwindCSS
 ## Diagram 
 > Unified Modeling Language (UML)
 ![UML](./Resources/UML_SpotLITE.png)
+
 > Entity Relationship Diagram (ERD)
 ![ERD](./Resources/ERD_SpotLITE.png)
+
+
 > Flowchart
 ![Flowchart](./Resources/Flowchart_SpotLITE.png)
 
@@ -16,5 +19,29 @@ PostgreSQL | JavaScript | HTML | Express.js | NPM | NodeJS | React | TailwindCSS
 Ikuti langkah-langkah berikut untuk menginstal dan menjalankan proyek ini di lingkungan lokal Anda.
 1. **Clone repositori ini**:
    ```bash
-   git clone https://github.com/purooo0/SpotLITE.git
+   git clone [https://github.com/purooo0/SpotLITE.git](https://github.com/SistemBasisData2024/SpotLITE.git)
    cd SpotLITE
+2. **Frontend**
+   ```bash
+   cd Frontend
+   ```
+   - Jalankan npm install untuk menginstal semua dependensi
+     ```bash
+     npm install
+   - Untuk menguji hasil instalasi jalankan
+     ```bash
+     npm run dev
+4. **Backend**
+   ```bash
+   cd Backend
+   ```
+   - Jalankan npm install untuk menginstal semua dependensi
+   ```bash
+     npm install
+   ```
+   - Untuk menguji hasil instalasi jalankan
+   ```bash
+     node index.js
+
+## Progress Report
+

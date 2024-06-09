@@ -1,7 +1,7 @@
 import React from 'react';
 import './PlayMusic.css';
 
-const MusicPlayer = ({ song, onClose }) => {
+const MusicPlayer = ({ song, onClose, onPrevious, onNext }) => {
   if (!song) {
     return null;
   }
@@ -26,6 +26,10 @@ const MusicPlayer = ({ song, onClose }) => {
         <a href={song.music_url} title={song.title} target="_blank" rel="noopener noreferrer" style={{ color: '#cccccc', textDecoration: 'none' }}>
           {song.title}
         </a>
+      </div>
+      <div className="navigation-buttons">
+        <button className="nav-button" onClick={onPrevious}>Previous</button>
+        <button className="nav-button" onClick={onNext}>Next</button>
       </div>
     </div>
   );

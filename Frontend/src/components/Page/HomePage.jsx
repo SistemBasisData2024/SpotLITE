@@ -28,6 +28,22 @@ const HomePage = () => {
     setSelectedSong(null);
   };
 
+  const handlePreviousSong = () => {
+    if (!selectedSong) return;
+    const currentIndex = songs.findIndex(song => song.id === selectedSong.id);
+    if (currentIndex > 0) {
+      setSelectedSong(songs[currentIndex - 1]);
+    }
+  };
+
+  const handleNextSong = () => {
+    if (!selectedSong) return;
+    const currentIndex = songs.findIndex(song => song.id === selectedSong.id);
+    if (currentIndex < songs.length - 1) {
+      setSelectedSong(songs[currentIndex + 1]);
+    }
+  };
+
   return (
     <div className="home-page">
       <h2>All Musics</h2>
@@ -42,7 +58,14 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-      {selectedSong && <MusicPlayer song={selectedSong} onClose={handleClosePlayer} />}
+      {selectedSong && (
+        <MusicPlayer
+          song={selectedSong}
+          onClose={handleClosePlayer}
+          onPrevious={handlePreviousSong}
+          onNext={handleNextSong}
+        />
+      )}
     </div>
   );
 };

@@ -71,3 +71,14 @@
 .progress-bar input[type="range"] {
   width: 100%;
 }
+
+.nav-button {
+  margin: 0 20px;
+  padding: 5px 10px;
+  background-color: #ff5500;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+}

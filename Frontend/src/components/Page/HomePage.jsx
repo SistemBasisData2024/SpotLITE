@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MusicPlayer from './PlayMusic';
 import './HomePage.css';
+import { useLocation } from 'react-router-dom';
 
 const HomePage = () => {
   const [songs, setSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -19,6 +21,12 @@ const HomePage = () => {
 
     fetchSongs();
   }, []);
+
+  useEffect(() => {
+    if (location.state && location.state.selectedSong) {
+      setSelectedSong(location.state.selectedSong);
+    }
+  }, [location.state]);
 
   const handleSongClick = (song) => {
     setSelectedSong(song);

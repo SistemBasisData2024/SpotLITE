@@ -42,6 +42,10 @@ const ArtistPage = () => {
     navigate(`/artists/${id}`);
   };
 
+  const handleSongClick = (song) => {
+    navigate('/home', { state: { selectedSong: song } });
+  };
+
   if (error) return <div className="error-message">{error}</div>;
 
   if (!id) {
@@ -78,8 +82,9 @@ const ArtistPage = () => {
         <h2>Songs</h2>
         <ul className="artist-list">
           {artist.songs && artist.songs.map((song) => (
-            <li key={song.id}>
+            <li key={song.id} onClick={() => handleSongClick(song)} style={{ cursor: 'pointer' }}>
               <div className="song">
+                <img src={song.cover_url} alt={song.title} className="song-image" />
                 <div>
                   <p className="song-title">{song.title}</p>
                   {song.artists && (

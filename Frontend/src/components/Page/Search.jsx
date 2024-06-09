@@ -1,10 +1,16 @@
+// Search.jsx
 import React from 'react';
 
-const Search = () => {
+const Search = ({ searchTerm, setSearchTerm }) => {
   return (
-    <div>
-      <h2>Search Page</h2>
-      <p>Welcome to the Search Page!</p>
+    <div className="search-container">
+      <input
+        type="text"
+        placeholder="Search for songs..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="search-input"
+      />
     </div>
   );
 };

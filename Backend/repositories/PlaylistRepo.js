@@ -81,10 +81,9 @@ const getPlaylistById = async (playlistId) => {
   }
 };
 
-// Function to get all playlists for a user
-const getAllPlaylists = async (userId) => {
+const getAllPlaylists = async () => {
   try {
-    const result = await pool.query('SELECT * FROM playlists WHERE user_id = $1', [userId]);
+    const result = await pool.query('SELECT * FROM playlists');
     return result.rows;
   } catch (error) {
     throw new Error(`Error fetching playlists: ${error.message}`);

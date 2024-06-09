@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Search from './Search';
 import './CreatePlaylist.css';
 
 const CreatePlaylistPage = () => {
@@ -9,6 +10,7 @@ const CreatePlaylistPage = () => {
   const [songs, setSongs] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -74,6 +76,12 @@ const CreatePlaylistPage = () => {
     );
   };
 
+  // Filter songs based on search term
+  const filteredSongs = songs.filter(song =>
+    (song.title && song.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (song.artist && song.artist.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   return (
     <div className="create-playlist-page">
       <h2>{isEditing ? 'Edit Playlist' : 'Create Playlist'}</h2>
@@ -83,16 +91,12 @@ const CreatePlaylistPage = () => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <textarea
-        placeholder="Playlist Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></textarea>
       {error && <div className="error-message">{error}</div>}
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <h3>Select Songs</h3>
       <ul>
-        {songs.length > 0 ? (
-          songs.map((song) => (
+        {filteredSongs.length > 0 ? (
+          filteredSongs.map((song) => (
             <li key={song.id}>
               <label>
                 <input
@@ -100,7 +104,7 @@ const CreatePlaylistPage = () => {
                   checked={selectedSongs.includes(song.id)}
                   onChange={() => handleSelectSong(song.id)}
                 />
-                {song.title} - {song.artist}
+                {song.title ? song.title : 'Untitled'} - {song.artist ? song.artist : 'Uknown artist'}
               </label>
             </li>
           ))

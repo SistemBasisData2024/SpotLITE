@@ -20,7 +20,7 @@ const UserProvider = ({ children }) => {
     }
   }, [user]);
 
-  console.log('Current user:', user); // Debug log to check user
+  console.log('Current user:', user); 
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -29,4 +29,4 @@ const UserProvider = ({ children }) => {
   );
 };
 
-export { UserContext, UserProvider };
+export { UserContext, UserProvider }

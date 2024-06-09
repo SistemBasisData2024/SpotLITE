@@ -7,11 +7,15 @@ import HomePage from './HomePage';
 import PlaylistPage from './PlaylistPage';
 import ProfilePage from './components/Page/ProfilePage';
 import CreatePlaylistPage from './components/Page/CreatePlaylist';
+import Login from './components/User/Login';
+import Login from './components/User/Signup';
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/playlists" element={<PlaylistPage />} />

@@ -2,33 +2,53 @@ const pool = require('../config/db');
 
 // Function to create a new playlist
 const createPlaylist = async (playlistData) => {
-  const { user_id, name, description, song_ids } = playlistData;
+  const { name, description, song_ids } = playlistData;
   try {
-    const client = await pool.connect();
-    await client.query('BEGIN');
-
-    const playlistResult = await client.query(
-      'INSERT INTO playlists (user_id, name, description) VALUES ($1, $2, $3) RETURNING *',
-      [user_id, name, description]
+    // Insert into the playlists table
+    const result = await pool.query(
+      'INSERT INTO playlists (name, description) VALUES ($1, $2) RETURNING *',
+      [name, description]
     );
-    const playlist = playlistResult.rows[0];
+    const playlistId = result.rows[0].id;
 
+    // Insert into the playlist_songs table
     if (song_ids && song_ids.length > 0) {
-      for (const song_id of song_ids) {
-        await client.query(
-          'INSERT INTO playlist_songs (playlist_id, song_id) VALUES ($1, $2)',
-          [playlist.id, song_id]
-        );
-      }
+      const songQueries = song_ids.map(song_id => (
+        pool.query('INSERT INTO playlist_songs (playlist_id, song_id) VALUES ($1, $2)', [playlistId, song_id])
+      ));
+      await Promise.all(songQueries);
     }
 
-    await client.query('COMMIT');
-    return playlist;
+    return result.rows[0];
   } catch (error) {
-    await client.query('ROLLBACK');
+    console.error(`Error creating playlist: ${error.message}`);
     throw new Error(`Error creating playlist: ${error.message}`);
-  } finally {
-    client.release();
+  }
+};
+
+
+// Function to update a playlist by ID
+const updatePlaylistById = async (playlistId, updatedPlaylistData) => {
+  const { name, description, song_ids } = updatedPlaylistData;
+  try {
+    const result = await pool.query(
+      'UPDATE playlists SET name = $1, description = $2 WHERE id = $3 RETURNING *',
+      [name, description, playlistId]
+    );
+    
+    await pool.query('DELETE FROM playlist_songs WHERE playlist_id = $1', [playlistId]);
+    
+    if (song_ids && song_ids.length > 0) {
+      const songQueries = song_ids.map(song_id => (
+        pool.query('INSERT INTO playlist_songs (playlist_id, song_id) VALUES ($1, $2)', [playlistId, song_id])
+      ));
+      await Promise.all(songQueries);
+    }
+
+    return result.rows[0];
+  } catch (error) {
+    console.error(`Error updating playlist: ${error.message}`);
+    throw new Error(`Error updating playlist: ${error.message}`);
   }
 };
 
@@ -68,30 +88,6 @@ const getAllPlaylists = async (userId) => {
     return result.rows;
   } catch (error) {
     throw new Error(`Error fetching playlists: ${error.message}`);
-  }
-};
-
-// Function to update a playlist by ID
-const updatePlaylistById = async (playlistId, updatedPlaylistData) => {
-  const { name, description, songs } = updatedPlaylistData;
-  try {
-    const result = await pool.query(
-      'UPDATE playlists SET name = $1, description = $2 WHERE id = $3 RETURNING *',
-      [name, description, playlistId]
-    );
-
-    await pool.query('DELETE FROM playlist_songs WHERE playlist_id = $1', [playlistId]);
-    const songInsertPromises = songs.map(songId => {
-      return pool.query('INSERT INTO playlist_songs (playlist_id, song_id) VALUES ($1, $2)', [playlistId, songId]);
-    });
-    await Promise.all(songInsertPromises);
-
-    if (result.rows.length === 0) {
-      throw new Error('Playlist not found');
-    }
-    return result.rows[0];
-  } catch (error) {
-    throw new Error(`Error updating playlist: ${error.message}`);
   }
 };
 

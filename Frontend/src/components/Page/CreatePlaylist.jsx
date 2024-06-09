@@ -62,6 +62,7 @@ const CreatePlaylistPage = () => {
       navigate('/playlists');
     } catch (err) {
       setError('Error saving playlist');
+      console.error('Error saving playlist:', err.response.data); // Log the error details
     }
   };
 

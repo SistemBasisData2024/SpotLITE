@@ -17,11 +17,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Configure CORS
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+app.use(cors());
 
 // Routes
 app.use('/songs', songRoute);

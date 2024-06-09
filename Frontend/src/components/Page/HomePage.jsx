@@ -28,6 +28,12 @@ const HomePage = () => {
     }
   }, [location.state]);
 
+  useEffect(() => {
+    if (location.state) {
+      window.history.replaceState(null, '');
+    }
+  }, []);
+
   const handleSongClick = (song) => {
     setSelectedSong(song);
   };
